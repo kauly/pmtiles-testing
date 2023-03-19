@@ -7,3 +7,8 @@ The tile is in the public folder but it's not possible to serve from there. I'm 
 ```shell
 http-server public --cors
 ```
+
+## Attributions
+
+Protomaps: https://protomaps.com/
+Florianópolis Geodata: https://www.pmf.sc.gov.br/entidades/geo/index.php?cms=mapas+para+download
