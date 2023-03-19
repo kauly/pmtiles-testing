@@ -10,5 +10,5 @@ http-server public --cors
 
 ## Attributions
 
-Protomaps: https://protomaps.com/
-Florianópolis Geodata: https://www.pmf.sc.gov.br/entidades/geo/index.php?cms=mapas+para+download
+- Protomaps: https://protomaps.com/
+- Florianópolis Geodata: https://www.pmf.sc.gov.br/entidades/geo/index.php?cms=mapas+para+download
