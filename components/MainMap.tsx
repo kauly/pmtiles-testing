@@ -1,9 +1,12 @@
 'use client';
-import Map, { MapboxStyle } from 'react-map-gl';
+import Map, { MapboxStyle, NavigationControl } from 'react-map-gl';
 import maplibreGl from 'maplibre-gl';
 import * as pmtiles from 'pmtiles';
-import layers from 'protomaps-themes-base';
+import getBbox from '@turf/bbox';
 
+import gFpolisGeojson from '@/public/gfpolis.json';
+
+const bbox = getBbox(gFpolisGeojson);
 const protocol = new pmtiles.Protocol();
 
 maplibreGl.addProtocol('pmtiles', protocol.tile);
@@ -14,10 +17,21 @@ const mapStyle: MapboxStyle = {
   sources: {
     protomaps: {
       type: 'vector',
-      url: 'pmtiles://http://127.0.0.1:8080/gpolis.pmtiles',
+      url: 'pmtiles://http://127.0.0.1:8080/gfpolis.pmtiles',
+      attribution: '<a href="https://protomaps.com">Protomaps</a> ©',
     },
   },
-  layers: layers('protomaps', 'debug'),
+  layers: [
+    {
+      id: 'gfpolis',
+      source: 'protomaps',
+      'source-layer': 'gfpolis',
+      type: 'line',
+      paint: {
+        'line-width': 1,
+      },
+    },
+  ],
 };
 
 export default function MainMap() {
@@ -25,13 +39,13 @@ export default function MainMap() {
     <Map
       mapLib={maplibreGl}
       initialViewState={{
-        longitude: -69.7292625,
-        latitude: -13.6562901,
-        zoom: 4,
+        bounds: bbox,
+        zoom: 6,
       }}
       style={{ width: '100vw', height: '100vh' }}
       mapStyle={mapStyle}
-      attributionControl={false}
-    />
+    >
+      <NavigationControl />
+    </Map>
   );
 }
